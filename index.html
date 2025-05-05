@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marielle Bautista Portfolio</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Cinzel Decorative font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Splash Screen */
+    #splash {
+      position: fixed;
+      background: url('images/bg 2.png') no-repeat center center;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .book {
+      
+      transform-style: preserve-3d;
+      position: relative;
+      height: 300px;
+      cursor: pointer;
+      backface-visibility: visible;
+    }
+
+    .front, .back, .page1, .page2, .page3, .page4, .page5, .page6 {
+      transform-style: preserve-3d;
+      position: absolute;
+      width: 200px;
+      height: 100%;
+      top: 0; left: 0;
+      transform-origin: left center;
+      transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
+    }
+
+    .front{
+      background: url('images/bookcover.jpg') no-repeat center center;
+      background-size: cover;
+      border-radius: .5em;
+    }
+
+    .back {
+      background: url('images/bookcover.jpg') no-repeat center center;
+      background-size: cover;
+      border-radius: .5em;
+    }
+
+    .front, .page1, .page3, .page5 {
+      border-bottom-right-radius: .5em;
+      border-top-right-radius: .5em;
+    }
+
+    .back, .page2, .page4, .page6 {
+      border-bottom-right-radius: .5em;
+      border-top-right-radius: .5em;
+    }
+
+    .page1 { 
+      background: rgb(170, 0, 0);
+    }
+
+    .page2 {
+      background: rgb(170, 0, 0);
+    }
+
+    .page3 {
+      background: rgb(170, 0, 0);
+    }
+
+    .page4 {
+      background: rgb(170, 0, 0);
+    }
+
+    .page5 {
+      background: #000000;
+    }
+
+    .page6 {
+      background: #000000;
+    }
+
+    .book:hover .front {
+      transform: rotateY(-160deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .page1 {
+      transform: rotateY(-150deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .page2 {
+      transform: rotateY(-30deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .page3 {
+      transform: rotateY(-140deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .page4 {
+      transform: rotateY(-40deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .page5 {
+      transform: rotateY(-130deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .page6 {
+      transform: rotateY(-50deg) scale(1.1);
+      box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+    }
+
+    .book:hover .back {
+      transform: rotateY(-20deg) scale(1.1);
+    }
+
+    
+
+    /* Main Site Styles */
+    body {
+      color: #ffffff;
+      font-family: 'Cinzel Decorative', cursive;
+      background: url('images/bg port.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    section {
+      background: url('images/bg port.png') no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 0;
+    }
+
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    /* Zoom In Animation */
+@keyframes zoomInBook {
+  0% {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3) rotateY(10deg);
+    opacity: 0;
+  }
+}
+
+.zooming {
+  animation: zoomInBook 1s forwards ease-in-out;
+  z-index: 10000;
+}
+
+
+    /* Ensure main content is hidden initially */
+    #main-content {
+      display: none;
+    }
+
+    @keyframes float {
+  0% {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    transform: translateY(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px rgba(0,0,0,0.2);
+    transform: translateY(-20px);
+  }
+  100% {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    transform: translateY(0px);
+  }
+}
+
+.floating-avatar {
+  animation: float 6s ease-in-out infinite;
+}
+
+.thorn-frame {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+}
+
+.thorn-frame::before {
+  content: "";
+  background: url('images/thorny circle.png') no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.thorn-frame img {
+  width: 200px;
+  border: 3px solid #F6C324;
+  box-shadow: 0 0 50px #990303;
+  z-index: 1;
+  position: relative;
+}
+
+.home-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: #000; /* black background */
+  min-height: 10vh;
+}
+
+.home-content {
+  max-width: 900px;
+  padding: 10px;
+  background-color: rgba(20, 20, 20, 0.9); /* dark semi-transparent box */
+  border: 10px; 
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(132, 0, 0, 0.5);
+  color: #f5f5f5;
+  font-family: 'Cinzel Decorative', serif;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.home-content p {
+  margin-bottom: 10px;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash" >
+    <div class="book" onclick="openBook()">
+      
+      <div class="back"></div>
+      <div class="page6"></div>
+      <div class="page5"></div>
+      <div class="page4"></div>
+      <div class="page3"></div>
+      <div class="page2"></div>
+      <div class="page1"></div>
+      <div class="front"></div>
+    </div>
+  </div>
+
+  <!-- Main Content (Initially Hidden) -->
+  <div id="main-content">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">MyPortfolio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Section -->
+    <!-- Home Section -->
+<section id="home" class="home-section text-center py-5">
+  <div class="thorn-frame floating-avatar">
+    <img src="images/pic.jpg" alt="Your portrait" class="img-fluid rounded-circle my-4 shadow-lg">
+  </div>
+
+  <div class="home-box">
+    <div class="home-content">
+      <h2 class="home-title">Welcome to My Realm</h2>
+      <p class="lead">
+        In a world shaped by code and imagination, I am Marielle Bautista,
+        a second-year IT student at NU Lipa with a fascination for turning ideas into interactive experiences.
+      </p>
+      <p>
+        My journey began with the magic of number systems and grew into full-fledged spells of HTML, CSS, Java, and Android app development. Whether it's crafting a mobile app, building websites, or dreaming up green tech solutions, I am always inspired by the power of technology to change the world.
+      </p>
+      <p>
+        Join me on this journey where design meets logic, and ideas transform into reality. Let’s create something amazing together.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+      <div class="container">
+        <h2 class="text-center">About Me</h2>
+        <p class="text-center lead">
+          I’m Marielle Bautista, a passionate second-year IT student at NU Lipa, navigating the exciting world of technology and development. My journey into the world of coding began with a fascination for logic and problem-solving, and it quickly evolved into a love for building meaningful digital experiences.
+        </p>
+        <p>
+          My expertise spans across front-end development, mobile app development, and exploring the potential of green tech innovations. I enjoy transforming complex ideas into simple, interactive solutions using HTML, CSS, Java, and Android. Every project I work on is an opportunity to learn something new, and I’m always eager to take on challenges that push my creativity and problem-solving skills.
+        </p>
+        <p>
+          Outside of coding, I’m inspired by storytelling, design, and the role technology can play in making the world a better place. Whether I’m creating an app to simplify people’s lives or crafting a website that leaves a lasting impression, my focus is always on blending functionality with beauty.
+        </p>
+        <p>
+          I believe that technology should serve a purpose – not only to solve problems but to inspire, connect, and enrich lives. I’m excited about the future and the endless possibilities of tech, and I’m always looking to connect with like-minded individuals who share a passion for innovation and creativity.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+<section id="projects" class="projects-section py-5 bg-dark text-white">
+  <div class="container">
+    <h2 class="text-center mb-5">Projects</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+
+      <!-- Project 1: Color Game -->
+      <div class="col">
+        <div class="card h-100 bg-secondary text-white">
+          <img src="images/colorgame.png" class="card-img-top" alt="Color Game">
+          <div class="card-body">
+            <h5 class="card-title">Color Game</h5>
+            <p class="card-text">A Java desktop game built in NetBeans where players guess the color based on hints. Simple and fun!</p>
+            <p class="text-muted small">Java · NetBeans · GUI</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: Virtual Pet -->
+      <div class="col">
+        <div class="card h-100 bg-secondary text-white">
+          <img src="images/virtualpet.png" class="card-img-top" alt="Virtual Pet App">
+          <div class="card-body">
+            <h5 class="card-title">Virtual Pet</h5>
+            <p class="card-text">A desktop app where users can feed, play, or put the pet to sleep. Made in NetBeans with interactive UI.</p>
+            <p class="text-muted small">Java · NetBeans · OOP</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Tic Tac Toe -->
+      <div class="col">
+        <div class="card h-100 bg-secondary text-white">
+          <img src="images/tictactoe.png" class="card-img-top" alt="Tic Tac Toe Game">
+          <div class="card-body">
+            <h5 class="card-title">Tic Tac Toe</h5>
+            <p class="card-text">Classic 2-player or player-vs-AI Tic Tac Toe game in Java. Choose your mode and play smart!</p>
+            <p class="text-muted small">Java · NetBeans · Game Logic</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: Budget Tracker -->
+      <div class="col">
+        <div class="card h-100 bg-secondary text-white">
+          <img src="images/budget tracker.png" class="card-img-top" alt="Budget Tracker App">
+          <div class="card-body">
+            <h5 class="card-title">Budget Tracker App</h5>
+            <p class="card-text">An Android app that tracks income and expenses, with features for account management and analysis.</p>
+            <p class="text-muted small">Java · Android Studio · MySQL</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container text-center">
+        <h2>Contact Me</h2>
+        <p>Email: <a href="mailto:bautistamarielle1226@gmail.com">bautistamarielle1226@gmail.com</a></p>
+        <p>Facebook: <a href="https://facebook.com/yourusername" target="_blank">@yourusername</a></p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Your Name</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    function openBook() {
+      const book = document.querySelector('.book');
+      book.classList.add('zooming');
+      // Add a delay for the animation (same time as the animation duration)
+      setTimeout(function() {
+        // Hide splash screen and show main content
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      }, 1000);  // 500ms matches the animation duration
+    }
+  </script>
+
+  <!-- Bootstrap JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
